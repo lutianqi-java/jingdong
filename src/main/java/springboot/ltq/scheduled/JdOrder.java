@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 public class JdOrder {
 
-
+    //    https://blog.csdn.net/hwt3525055/article/details/76147346
     private static final Integer pageSize = 30;
     private static Integer total_page_number = 0;
 
