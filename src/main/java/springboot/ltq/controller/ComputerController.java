@@ -13,6 +13,7 @@ public class ComputerController {
     @Autowired
     ComputerDao computerDao;
 
+
     @RequestMapping("list")
     public String list(Model model) {
         model.addAttribute("list", computerDao.list(null));
