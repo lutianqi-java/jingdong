@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="springboot.ltq.dao.ComputerDao">
+
+
+    <insert id="inserComputerList">
+        insert into computer(sku,price,name,create_time,img_url)
+        values
+        <foreach collection="computerList" item="row" separator=",">
+            (#{row.sku},#{row.price},#{row.name},#{row.create_time},#{row.img_url})
+        </foreach>
+    </insert>
+
+    <select id="list" resultType="springboot.ltq.entity.Computer">
+        select * from computer
+    </select>
+
+</mapper>
