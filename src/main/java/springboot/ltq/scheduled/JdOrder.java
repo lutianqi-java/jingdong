@@ -125,10 +125,9 @@ public class JdOrder {
                 .build();
         HttpGet httpGet2 = new HttpGet("https://search.jd.com/s_new.php?keyword=" + keyword + "&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&page=" + index + "&s=" + ((index - 1) * pageSize + 1) + "&scrolling=y&log_id=1523801375.21180&tpl=1_M");
         httpGet2.setConfig(requestConfig);
-
         httpGet2.setHeader(":authority", "search.jd.com");
         httpGet2.setHeader(":method", "GET");
-        httpGet2.setHeader(":path", "/s_new.php?keyword=%E7%94%B5%E8%84%91&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&offset=6&wq=%E7%94%B5%E8%84%91&page=6&s=131&scrolling=y&log_id=1523790420.93457&tpl=1_M&show_items=5143491,5189394,6072614,15660770359,4345751,5168128,11199566916,5005865,14541812605,5933840,3794327,4334250,3951151,3794329,5702720,6031883,5025522,5352356,3682513,5168562,4796475,5088073,4472046,4129905,6226251,3178510,6704065,4979920,3915827,5223493");
+        httpGet2.setHeader(":path", "/s_new.php?keyword=" + keyword + "&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&offset=6&wq=%E7%94%B5%E8%84%91&page=6&s=131&scrolling=y&log_id=1523790420.93457&tpl=1_M&show_items=5143491,5189394,6072614,15660770359,4345751,5168128,11199566916,5005865,14541812605,5933840,3794327,4334250,3951151,3794329,5702720,6031883,5025522,5352356,3682513,5168562,4796475,5088073,4472046,4129905,6226251,3178510,6704065,4979920,3915827,5223493");
         httpGet2.setHeader("scheme", "https");
         httpGet2.setHeader("accept", "*/*");
         httpGet2.setHeader("accept-encoding", "zh-CN,zh;q=0.8");
