@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 import springboot.ltq.dao.ComputerDao;
 import springboot.ltq.entity.Computer;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,12 +30,13 @@ public class JdOrder {
     private static Integer total_page_number = 0;
     private static Integer total = 0;
 
+    private static List<Computer> computerList = new ArrayList<>();
+
     @Autowired
     ComputerDao computerDao;
 
-    @PostConstruct
-    public void computer() {
-        String keyword = "144hz%E6%98%BE%E7%A4%BA%E5%99%A8%202k";
+    //    @PostConstruct
+    public static List<Computer> computer(String keyword) {
         CloseableHttpClient httpCilent2 = HttpClients.createDefault();
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(5000)   //设置连接超时时间
@@ -49,9 +49,10 @@ public class JdOrder {
         Integer page = 1;
         Integer totalNumberGet = 0;
         getOrder(keyword, httpCilent2, requestConfig, index, totalNumberGet);
+        return computerList;
     }
 
-    private void getOrder(String keyword, CloseableHttpClient httpCilent2, RequestConfig requestConfig, Integer index, Integer totalNumberGet) {
+    private static void getOrder(String keyword, CloseableHttpClient httpCilent2, RequestConfig requestConfig, Integer index, Integer totalNumberGet) {
         if (totalNumberGet < total || index == 1) {
             HttpGet httpGet2 = new HttpGet("https://search.jd.com/Search?keyword=" + keyword + "&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&page=" + index + "&s=" + ((index - 1) * pageSize + 1));
             httpGet2.setConfig(requestConfig);
@@ -67,15 +68,15 @@ public class JdOrder {
                     Elements elements = doc.select("ul[class=gl-warp clearfix]").select("li[class=gl-item]");
                     Elements text1 = doc.getElementsByTag("script").eq(3);
                     if (index == 1) {
-                    /*循环遍历script下面的JS变量*/
+                        /*循环遍历script下面的JS变量*/
                         for (Element element : text1) {
-                        /*取得JS变量数组*/
+                            /*取得JS变量数组*/
                             String[] datas = element.data().toString().split("var");
-                        /*取得单个JS变量*/
+                            /*取得单个JS变量*/
                             for (String variable : datas) {
-                            /*过滤variable为空的数据*/
+                                /*过滤variable为空的数据*/
                                 if (variable.contains("=")) {
-                                /*取到满足条件的JS变量*/
+                                    /*取到满足条件的JS变量*/
                                     if (variable.contains("LogParm")) {
                                         variable = variable.replace("\n\t", "");
                                         variable = variable.replace("\t", "");
@@ -84,13 +85,13 @@ public class JdOrder {
                                         JSONObject js_detail = JSON.parseObject(js);
                                         total = Integer.valueOf(js_detail.get("result_count").toString());
                                         total_page_number = total % pageSize == 0 ? total / pageSize : (total / pageSize) + 5;
-                                    /*取得JS变量存入map*/
+                                        /*取得JS变量存入map*/
                                     }
                                 }
                             }
                         }
                     }
-                    getData(elements);
+                    List<Computer> data = getData(elements);
                     index++;
                     totalNumberGet += elements.size();
                     Integer numnber = nextPage(keyword, totalNumberGet, index);
@@ -115,7 +116,7 @@ public class JdOrder {
 
     }
 
-    public Integer nextPage(String keyword, Integer totalNumberGet, Integer index) throws IOException {
+    public static Integer nextPage(String keyword, Integer totalNumberGet, Integer index) throws IOException {
         CloseableHttpClient httpCilent2 = HttpClients.createDefault();
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(5000)   //设置连接超时时间
@@ -150,7 +151,7 @@ public class JdOrder {
     }
 
 
-    public List<Computer> getData(Elements elements) {
+    public static List<Computer> getData(Elements elements) {
         //获取的数据，存放在集合中
         List<Computer> data = new ArrayList<Computer>();
         for (Element ele : elements) {
@@ -173,10 +174,11 @@ public class JdOrder {
             //将每一个对象的值，保存到List集合中
             data.add(computer);
         }
-        if (data.size() > 0) {
-            computerDao.inserComputerList(data);
-        }
+//        if (data.size() > 0) {
+//            computerDao.inserComputerList(data);
+//        }
         //返回数据
+        computerList.addAll(data);
         return data;
     }
 

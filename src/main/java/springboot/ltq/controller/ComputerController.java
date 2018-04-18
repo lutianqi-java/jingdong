@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springboot.ltq.dao.ComputerDao;
+import springboot.ltq.scheduled.JdOrder;
 
 @Controller
 @RequestMapping(value = "computer")
@@ -15,8 +16,9 @@ public class ComputerController {
 
 
     @RequestMapping("list")
-    public String list(Model model) {
-        model.addAttribute("list", computerDao.list(null));
+    public String list(Model model, String search) {
+        model.addAttribute("list", JdOrder.computer(search));
         return "Computer";
     }
+
 }

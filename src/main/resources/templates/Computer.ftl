@@ -17,6 +17,7 @@
     </tr>
     <#list list as row>
         <tr>
+            <td>${row_index+1}</td>
             <td><img src="${row.img_url}"></td>
             <td>${row.name}</td>
             <td>${row.price}</td>

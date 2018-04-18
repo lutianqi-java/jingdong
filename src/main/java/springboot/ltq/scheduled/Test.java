@@ -16,7 +16,6 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
         String keyword = "144hz%E6%98%BE%E7%A4%BA%E5%99%A8%202k";
-
         CloseableHttpClient httpCilent2 = HttpClients.createDefault();
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(5000)   //设置连接超时时间
@@ -40,9 +39,8 @@ public class Test {
 //        httpGet2.setHeader("x-requested-with", "XMLHttpRequest");
 
         httpGet2.setHeader(":authority", "s.taobao.com");
-
         httpGet2.setHeader(":method", "GET");
-        httpGet2.setHeader("path", "/api?_ksTS=1523847730452_224&callback=jsonp225&ajax=true&m=customized&stats_click=search_radio_all:1&q=32%E5%AF%B8%E6%9B%B2%E9%9D%A2%E6%98%BE%E7%A4%BA%E5%99%A82k%20144hz&s=36&imgfile=&initiative_id=staobaoz_20180416&bcoffset=-1&js=1&ie=utf8&rn=8fe51312869d390ffd7d03dae22bb283");
+        httpGet2.setHeader("path", "/api?_ksTS=1523847730452_224&callback=jsonp225&ajax=true&m=customized&stats_click=search_radio_all:1&q=32%E5%AF%B8%E6%9B%B2%E9%9D%A2%E6%98%BE%E7%A4%BA%E5%99%A82k%20144hz&s=199&imgfile=&initiative_id=staobaoz_20180416&bcoffset=-1&js=1&ie=utf8&rn=8fe51312869d390ffd7d03dae22bb283");
         httpGet2.setHeader(":scheme", "https");
         httpGet2.setHeader(":accept", "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01");
         httpGet2.setHeader("accept-encoding", "gzip, deflate, br");
