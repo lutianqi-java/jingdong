@@ -1,32 +1,4 @@
 
-
-#    spring.datasource.url=jdbc:mysql://localhost:3306/test
-#    spring.datasource.username=root
-#    spring.datasource.password=
-#    spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-#    spring.datasource.druid.initial-size=1
-#    spring.datasource.druid.min-idle=1
-#    spring.datasource.druid.max-active=20
-#    spring.datasource.druid.test-on-borrow=true
-#    spring.datasource.druid.stat-view-servlet.allow=true
-#spring:
-#  datasource:
-#    driverClassName: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/taotao
-#    username: lu
-#    password: 123456
-druid:
-    url: jdbc:mysql://localhost:3306/jd_order?useUnicode\=true&characterEncoding\=UTF8mb4
-    username: root
-    password: 199462
-    initial-size: 1
-    min-idle: 1
-    max-active: 20
-    test-on-borrow: true
-mybatis:
-    type-aliases-package: springboot.ltq.entity
-    mapper-locations: classpath:mapper/*.xml
-
 server:
   port: 8188
 spring:
@@ -45,6 +17,13 @@ spring:
     suffix: .ftl
     template-loader-path: classpath:/templates/
     settings.template_update_delay: 0
-
+  data:
+     mongodb:
+      uri: mongodb://192.168.1.42:27017/test
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/boos
+    username: lu
+    password: 199462
 
 
